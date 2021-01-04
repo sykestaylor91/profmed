@@ -1,0 +1,35 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="collapsed=true" ng-click="collapsed = !collapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">ACOG</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" collapse="collapsed">
+            <ul class="nav navbar-nav">
+                <li ng-repeat="button in buttons | filter:{right: '!'}" ng-hide="button.hide()">
+                    <a href="{{button.link}}" ng-click="button.click()">
+                      <i ng-class="button.class"></i>
+                      <span>{{button.title}}</span>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-repeat="button in buttons | filter:{right: ''}" ng-hide="button.hide()">
+                    <a href="{{button.link}}" ng-click="button.click()">
+                      <i ng-class="button.class"></i>
+                      <span>{{button.title}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+

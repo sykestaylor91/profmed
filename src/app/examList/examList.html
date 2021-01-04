@@ -1,0 +1,33 @@
+<navbar></navbar>
+<div class="container">
+  <h1>Session Selection</h1>
+  <table class="table"  ng-hide="examListController.isLoading()">
+      <caption></caption>
+      <thead>
+          <tr>
+              <th><span class="title">
+                <span>Name</span>
+                  <span class="pull-right">
+                    <i class="hide glyphicon glyphicon-chevron-down"></i>
+                  </span>
+                </span>
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="e in examListController.examsToDisplay | orderBy:'rank':false" ng-class="{'disabled':!e.available}">
+              <td ng-click="e.available && examListController.goToExam(e.id, e.userExamId)">
+                  <div>
+                    <span class="title-label">{{e.title}}</span>
+                    <span class="pull-right">
+                      <i class="glyphicon glyphicon-chevron-right"></i>
+                    </span>
+                  </div>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+  <spinner ng-show="examListController.isLoading()"></spinner>
+  <p></p>
+  <p>Copyright information. Copyright information. Copyright information. Copyright information. Copyright information. </p>
+</div>

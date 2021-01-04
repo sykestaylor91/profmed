@@ -1,0 +1,75 @@
+<navbar class="no-padding"></navbar>
+<titlebar title="{{examQuestionController.userExam.attributes.title}}"></titlebar>
+<spinner ng-show="examQuestionController.isLoading()"></spinner>
+<div class="container" ng-hide="examQuestionController.isLoading()">
+    <div class="row">
+        <div class="col-sm-8">
+            <div ng-bind-html="examQuestionController.question.attributes.question"></div>
+            <!-- TODO: add answer element directive for answer options -->
+            <div class="answers-container">
+                <div ng-repeat="option in examQuestionController.question.attributes.answers" class="answer-option">
+                    <div ng-disabled="examQuestionController.eliminated[option.id]" class="button answer" ng-model="examQuestionController.answerId" btn-radio="option.id">
+                        <div class="selector">
+                            <label>{{examQuestionController.optionLabels[$index]}}</label>
+                            <i ng-hide="examQuestionController.answerId == option.id" class="fa fa-circle-o"></i>
+                            <i ng-show="examQuestionController.answerId == option.id" class="fa fa-dot-circle-o"></i>
+                        </div>
+                        <div class="option-text" ng-bind-html="option.text"></div>
+                    </div>
+                    <div class="button elimination" ng-model="examQuestionController.eliminated[option.id]" btn-checkbox tooltip="{{examQuestionController.eliminated[option.id] ? tooltipStrikeUndo : tooltipStrike}}" tooltip-placement="left">
+                        <div ng-init="tooltipStrike='Strike-through and eliminate this option'"></div>
+                        <div ng-init="tooltipStrikeUndo='Restore this option'"></div>
+                        <i ng-hide="examQuestionController.eliminated[option.id]" class="fa fa-strikethrough"></i>
+                        <i ng-show="examQuestionController.eliminated[option.id]" class="fa fa-undo"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row button-panel">
+                <div class="col-sm-7">
+                    <button ng-disabled="!examQuestionController.answerId" class="btn btn-primary btn-lg btn-block">
+                        <i class="flaticon stroke pencil"></i>
+                        <span>Submit Answer</span>
+                    </button>
+                    <button ng-disabled="!examQuestionController.answerId" class="btn btn-warning btn-lg btn-block">
+                        <i class="flaticon stroke pencil"></i>
+                        <span>Revisit Later</span>
+                    </button>
+                </div>
+                <div class="col-sm-5">
+                    <button class="btn btn-primary btn-lg btn-block">
+                        <span>Next</span>
+                        <i class="fa fa-step-forward"></i>
+                    </button>
+                    <button class="btn btn-primary btn-lg btn-block">
+                        <i class="fa fa-step-backward"></i>
+                        <span>Previous</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1">
+            <h4 ng-class="{invisible: hideTimer}">
+                  <i class="fa fa-clock-o"></i>
+                  <span>Time left: </span>
+                  <span class="text-nowrap">{{examQuestionController.getTimeLeft() | date : 'h:mm Z'}}</span>
+                </h4>
+            <div class="button-panel">
+                <button ng-model="hideTimer" btn-checkbox class="btn btn-default btn-block">
+                    <i class="fa fa-clock-o"></i>
+                    <span>{{hideTimer ? 'Show' : 'Hide'}} Timer</span>
+                </button>
+                <button ng-model="hideMap" btn-checkbox class="btn btn-default btn-block">
+                    <i class="fa fa-table"></i>
+                    <span>{{hideMap ? 'Show' : 'Hide'}} Map</span>
+                </button>
+            </div>
+            <div ng-class="{hide: hideMap}" class="response-map">
+                <div ng-repeat="x in examQuestionController.responses" class="btn" ng-class="{answered: !($index%5), revisit: !($index%4)}">
+                    {{x}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

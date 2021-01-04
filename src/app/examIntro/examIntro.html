@@ -1,0 +1,28 @@
+<navbar></navbar>
+<spinner ng-show="examIntroController.isLoading()"></spinner>
+<div class="container" ng-hide="examIntroController.isLoading()">
+    <h1 ng-bind-html="examIntroController.exam.title"></h1>
+    <form ng-if="examIntroController.lockScreen" name="form.main" ng-submit="examIntroController.startExam()" qn-validate="errors" class="form-inline">
+      <p>Session has been locked. Raise your hand and ask your proctor for help.</p>
+      <div ng-show="examIntroController.isSecureExam">
+        <p>Enter one-time unlock code provided by proctor or ask them to enter a master code.</p>
+          <div ng-class="{error: form.main.passCode.$error.pass}" class="form-group">
+              <label class="control-label">Enter a code to unlock:</label>
+                  <input type="password" name="passCode" placeholder="code" ng-model="examIntroController.formModel.passCode" class="form-control" ng-required="examIntroController.isSecureExam">
+          </div>
+          <span></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Resume Session</button>
+    </form>
+    <div ng-bind-html="examIntroController.exam.attributes.intro"></div>
+    <form ng-if="!examIntroController.lockScreen" name="form.main" ng-submit="examIntroController.startExam()" qn-validate="errors" class="form-inline">
+        <div ng-class="{error: form.main.passCode.$error.pass}" class="form-group">
+            <label class="control-label">Enter a pass code:</label>
+                <input type="password" name="passCode" placeholder="code" ng-model="examIntroController.formModel.passCode" class="form-control" required>
+        </div>
+        <span></span>
+        <button type="submit" class="btn btn-primary">Begin Session</button>
+    </form>
+    <p></p>
+    <button type="button" class="btn btn-warning" ui-sref="examList">Go Back</button>
+</div>

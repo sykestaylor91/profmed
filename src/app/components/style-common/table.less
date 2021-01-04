@@ -1,0 +1,48 @@
+.table {
+  border-radius: @btn-border-radius-base;
+  border: 2px solid @grayAlt2;
+  border-collapse: separate;
+
+  thead tr th, tr th {
+    background-color: @grayLighter;
+    border-bottom: none;
+  }
+  .actions {
+    white-space: nowrap;
+  }
+  tr.disabled td {
+    color: @grayAlt3;
+    i {
+      display: none;
+    }
+  }
+  tr {
+    td {
+        background-color: @white;
+
+    }
+    &:first-child {
+        td {
+            border-top: none;
+        }
+    }
+    &:hover {
+        cursor: pointer;
+        td {
+          background-color: @grayLighter;
+        }
+    }
+    &.disabled {
+      &:hover {
+        cursor: default;
+      }
+      td {
+        color: @grayAlt3;
+        i {
+          display: none;
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,29 @@
+<navbar></navbar>
+<div class="container">
+    <h1> Sign in </h1>
+    <form name="form.signin" ng-submit="signInController.signInAction()" qn-validate="errors" class="form-horizontal">
+        <div ng-class="{error: form.signin.userNameOrEmail.$error.pass}" class="form-group" ng-show="!signInController.passwordStep">
+            <label class="control-label col-sm-3">User-name or email</label>
+            <div class="controls col-sm-6">
+                <input type="text" name="userNameOrEmail" placeholder="User-name or email" ng-model="signInController.formModel.userNameOrEmail" required="required" class="form-control" show-focus="!signInController.passwordStep">
+            </div>
+        </div>
+        <div ng-class="{error: form.signin.password.$error.pass}" class="form-group" ng-show="!signInController.multiStep || signInController.passwordStep">
+            <label class="control-label col-sm-3">Password</label>
+            <div class="controls col-sm-6">
+                <input type="password" name="password" placeholder="Password" ng-model="signInController.formModel.password" class="form-control" show-focus="signInController.passwordStep" ng-required="!signInController.multiStep">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-6">
+                <button type="button" class="btn btn-default" ng-show="signInController.passwordStep" ng-click="signInController.stepBack()">Back</button>
+                <button type="submit" class="btn btn-primary" ng-hide="signInController.isLoading()">Sign in</button>
+                <spinner ng-show="signInController.isLoading()"></spinner>
+            </div>
+        </div>
+    </form>
+    <ul class="list-inline" ng-if="false">
+        <li><a href="#/register">Register</a></li>
+        <li><a href="#/forgotten">Forgotten</a></li>
+    </ul>
+</div>
